@@ -3,9 +3,31 @@ pipeline {
   stages {
     stage('MENSAJE') {
       steps {
-        echo 'Iniciando compilación'
-        sh 'mvn clean install '
-        echo 'Compilación finalizada'
+        echo 'Iniciando compilaciÃ³n'
+      }
+    }
+
+    stage('CAMBIO DE RAMA') {
+      parallel {
+        stage('CAMBIO DE RAMA') {
+          steps {
+            sh 'git checkout answer4'
+          }
+        }
+
+        stage('TEXTO') {
+          steps {
+            echo 'Cambiando de rama'
+          }
+        }
+
+      }
+    }
+
+    stage('COMPILACIÓN') {
+      steps {
+        sh 'mvn clean install'
+        echo 'Chachi'
       }
     }
 
